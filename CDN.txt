@@ -1,0 +1,10 @@
+제이쿼리 CDN
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+폰트어썸
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+
+폰트어썸 유니코드 사용 법
+가상요소에
+    font-family:"Font Awesome 5 Free";
+	폰트웨이트 600이상으로 설정
