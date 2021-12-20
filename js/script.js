@@ -27,3 +27,14 @@ $(window).scroll(function(){
 });
 
 $('.wheel-bg').clone().appendTo('article');
+
+$(".trailler-btn").click(function(){
+    $(".trailler-popup").toggleClass("active");
+});
+function trailler(video) {
+    $(".trailler video").attr({'src':video})
+    $(".trailler-popup").toggleClass("active");
+}
+function videoClose(){
+    $(".trailler-popup").remove("active");
+}

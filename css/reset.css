@@ -10,5 +10,8 @@
     color:#333;
 }
 .clearfix:after, .clearfix:before { content:""; display:block; clear:both; }
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+}
 li { list-style:none; }
 a { text-decoration:none; }
