@@ -8,10 +8,13 @@
 *{
     margin:0; padding:0; box-sizing:border-box;
     color:#333;
+    scroll-behavior:smooth;
 }
 .clearfix:after, .clearfix:before { content:""; display:block; clear:both; }
+.clear { clear:both; }
 body {
     font-family: 'Noto Sans KR', sans-serif;
+    --white:#fff;
 }
 li { list-style:none; }
 a { text-decoration:none; }

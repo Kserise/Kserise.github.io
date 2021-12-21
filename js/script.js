@@ -1,3 +1,10 @@
+
+$(".toggle").click(function(){
+    $(this).toggleClass("active");
+    $("header ul").toggleClass("active");
+})
+
+
 $(".package").eq(0).addClass("active");
 $(".thumb > img").click(function(){
     var index = $(this).index();
@@ -9,24 +16,24 @@ $(".thumb > img").click(function(){
     $(".text-box > ul > li").eq(index).addClass("active");
 });
 
-
-const scob1 = $(".scr-ob1");
-const scob2 = $(".scr-ob2");
-const scob3 = $(".scr-ob3");
-const scob4 = $(".scr-ob4");
 /*
 var scrollValue; //스크롤 위치 확인
 $(window).scroll(function () { scrollValue = $(document).scrollTop(); console.log(scrollValue); });
 */
 $(window).scroll(function(){
     var scrol = window.scrollY;
+    const scob1 = $(".scr-game.active .scr-ob1");
+    const scob2 = $(".scr-game.active .scr-ob2");
+    const scob3 = $(".scr-game.active .scr-ob3");
+    const scob4 = $(".scr-game.active .scr-ob4");
+
     scob1.css({'top': (-1184+scrol)*0.1+"px"});
     scob2.css({'left': -(-1184+scrol)*0.15+"px"});
     scob3.css({'left': (-1184+scrol)*0.15+"px"});
     scob4.css({'opacity': (-1184+scrol)*0.005});
 });
 
-$('.wheel-bg').clone().appendTo('article');
+$('.wheel-bg').clone().appendTo('article .wheel-con');
 
 $(".trailler-btn").click(function(){
     $(".trailler-popup").toggleClass("active");
@@ -38,3 +45,54 @@ function trailler(video) {
 function videoClose(){
     $(".trailler-popup").remove("active");
 }
+
+var scrIndex = 0;
+const scrGame = $(".scr-game");
+const scrText = $(".game-textbox > ul > li");
+scrGame.removeClass("active").eq(0).addClass("active");
+
+scrGame.click(function(){
+    var bgurl;
+
+    if(scrIndex < 2){
+        scrIndex++;
+    }else {
+        scrIndex = 0;
+    }
+
+
+    if(scrIndex == 0) {
+        bgurl = "imgs/tak-scr-bg.jpg";
+    }else if(scrIndex == 1){
+        bgurl = "imgs/ls-scr-bg.png";
+    }else if(scrIndex == 2){
+        bgurl = "imgs/gow-scr-bg.png";
+    }
+
+    $(".imgBx > img").attr({'src':bgurl});
+
+    scrGame.removeClass("active");
+    scrGame.eq(scrIndex).addClass("active");
+    scrText.removeClass("active");
+    scrText.eq(scrIndex).addClass("active");
+});
+
+
+$(".package").click(function(){
+    var index = $(this).index();
+    var bgurl;
+
+    if(index == 0) {
+        bgurl = "imgs/tak-scr-bg.jpg";
+    }else if(index == 1){
+        bgurl = "imgs/ls-scr-bg.png";
+    }else if(index == 2){
+        bgurl = "imgs/gow-scr-bg.png";
+    }
+
+    $(".imgBx > img").attr({'src':bgurl});
+    scrGame.removeClass("active");
+    scrGame.eq(index).addClass("active");
+    scrText.removeClass("active");
+    scrText.eq(index).addClass("active");
+});

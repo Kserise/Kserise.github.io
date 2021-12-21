@@ -1,5 +1,4 @@
 @charset "utf-8";
-/* 헤더 */
 @keyframes pac-bg {
     0% {
         background-position:0% 0%;
@@ -35,6 +34,7 @@
         transform:rotate(360deg);
     }
 }
+/* 헤더 */
 header {
     display:flex;
     justify-content:space-between;
@@ -45,7 +45,7 @@ header {
     width:100%; 
     height:100px;
     padding:0 100px;
-    background:#fff;
+    background:var(--white);
     font-family: 'Poppins', sans-serif;
 }
 header h2 a {
@@ -63,6 +63,7 @@ header li a { margin:10px; text-transform:uppercase; font-weight:500;}
 header li a:hover .text{
     color:rgb(95, 196, 108);
 }
+.toggle { display:none;}
 /* 섹션 */
 section { 
     font-family: 'Noto Sans KR', sans-serif;
@@ -85,7 +86,15 @@ section:before {
 }
 /* wheel-bg */
 
-.wheel-bg {
+.wheel-con {
+    position:absolute; z-index:-1;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+section .wheel-bg {
     position:absolute; z-index:-2;
     left:50%;
     top:50%;
@@ -94,22 +103,22 @@ section:before {
     display:flex;
     justify-content: center;
     align-items: center;
-    animation:wheel 15s infinite;
+    animation:wheel 15s linear infinite;
 }
-.wheel-bg ul {
+section .wheel-bg ul {
     display:flex;
     justify-content: center;
     align-items: center;
     position:relative;
     transform:translateX(-432px);
 }
-.wheel-bg ul li {
+section .wheel-bg ul li {
     position:absolute;
     transform-origin:450px;
     transform:rotate(calc(360deg/14*var(--i)));
     font-size:30px;
 }
-.wheel-bg ul li ion-icon, .wheel-bg ul li i {
+section .wheel-bg ul li ion-icon, section .wheel-bg ul li i {
     transform:rotate(calc(-360deg/14*var(--i)));
     color:#555;
 }
@@ -144,7 +153,9 @@ section .package-box {
     min-width:32%; margin-top:100px;
 }
 
-.package-box .package { visibility:hidden; position:absolute; z-index:2; overflow:hidden; width:32%; border-radius:20px; box-shadow:3px 5px 8px rgba(0,0,0,0.30);}
+.package-box .package { 
+    visibility:hidden; position:absolute; z-index:2; overflow:hidden; width:32%; border-radius:20px; box-shadow:3px 5px 8px rgba(0,0,0,0.30); cursor:pointer;
+}
 
 .package-box .package.active { 
     z-index:2; visibility:visible; 
@@ -156,12 +167,13 @@ section .package-box {
     padding-top:120%;
 }
 .package-box .pac-bg { 
-    position:absolute; left:0; top:0; width:100%; height:100%; background:linear-gradient(to right, #8E0E00,#7b4397,#b3464d );
+    position:absolute; left:0; top:0; width:100%; height:100%; 
+    background:linear-gradient(to right, #8E0E00,#7b4397,#b3464d );
     background-size:1000% 1000%;
     animation:pac-bg 5s infinite alternate;
 }
 .package-box .package:nth-child(3) .pac-bg {
-    background:#fff;
+    background:var(--white);
 }
 .package-box .package img { 
     position:absolute; 
@@ -323,28 +335,12 @@ article {
     width:100%;
     padding-top:10px;
 }
-article:before {
-    content:'';
-    position:absolute; z-index:-1;
-    left:0;
-    top:0;
-    width:100%;
-    height:100%;
-    background:url('../imgs/cyberpunk.jpg') no-repeat center;
-    background-attachment:fixed;
-    opacity:0.8;
-    box-shadow:0 0px 50px 50px #fff inset;
+.container {
+    width:90%;
+    max-width:1000px;
+    margin:0 auto;
 }
-article:after {
-    content:'';
-    position:absolute; z-index:-1;
-    left:0;
-    top:10px;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.6);
-    box-shadow:0 0px 50px 50px #000 inset;
-}
+
 article .chapter-box {
     width:100%;
     height:300px;
@@ -372,14 +368,40 @@ article .chapter-box ion-icon {
 
 /* 아티클 휠bg*/
 
+
 article .wheel-bg {
-    left:0;
-    top:-5%;
+    position:absolute; z-index:-2;
+    left:-25%;
+    bottom:0%;
+    width:500px;
+    height:500px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
     animation:wheel 15s linear infinite;
+    opacity:0.5;
+}
+article .wheel-bg ul {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    position:relative;
+    transform:translateX(-432px);
+}
+article .wheel-bg ul li {
+    position:absolute;
+    transform-origin:450px;
+    transform:rotate(calc(360deg/14*var(--i)));
+    font-size:100px;
+}
+article .wheel-bg ul li ion-icon, section .wheel-bg ul li i {
+    transform:rotate(calc(-360deg/14*var(--i)));
+    color:#999;
 }
 
-/* 스크롤 이미지 */
 
+
+/* 스크롤 이미지 */
 .scrolls {
     position:relative;
     width:100%;
@@ -390,29 +412,36 @@ article .wheel-bg {
     padding:0 50px;
 }
 .scrolls .scr-game {
-    visibility:hidden;
-    position:absolute;
+    position:absolute; z-index:1;
     width:90%;
-    max-width:1000px;
     height:100%;
     overflow:hidden;
     box-shadow:1px 1px 5px #000,
     0px 0px 0px 2px #333 inset;
     transition:0.4s;
-}
-.scrolls .scr-game.active {
-    visibility:visible;
+    cursor:pointer;
 }
 .scrolls .scr-game:nth-child(1) {
+    opacity:0.3;
+    transform:translate(-20px, -20px);
     background: url('../imgs/taken7/tak-scroll/tak-behindmap.png');
 }
 .scrolls .scr-game:nth-child(2) {
+    opacity:0.3;
+    transform:translate(-20px, -20px);
     background: url('../imgs/like-snake/ls-scroll/ls-behindmap.png');
 }
 .scrolls .scr-game:nth-child(3) {
+    opacity:0.3;
+    transform:translate(-20px, -20px);
     background: url('../imgs/gow/gow-scroll/gow-behindmap.png');
 }
-
+.scrolls .scr-game.active {
+    opacity:1;
+    transform:translate(0, 0);
+    transition:0.5s;
+    z-index:3;
+}
 .scrolls .scr-game img {
     position:absolute;
     width:100%;
@@ -420,8 +449,27 @@ article .wheel-bg {
     object-fit:cover;
 }
 
-
-
+/* 스크롤게임 백그라운드*/
+.imgBx {
+    position:absolute;
+    width:100%;
+    height:400px;
+    overflow:hidden;
+}
+.imgBx:before {
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100px;
+    background:linear-gradient(to top, transparent, #fff);
+}
+.imgBx img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
 
 /* 게임소개 텍스트 */
 
@@ -433,18 +481,32 @@ article .wheel-bg {
 }
 .game-textbox ul {
     position:relative;
-    width:90%;
-    max-width:1000px;
     padding-top:30px;
 }
 .game-textbox ul li {
+    display:none;
+    justify-content: space-between;
+    align-items: flex-start;
+    min-width:100%;
+}
+.game-textbox ul li.active {
+    display:flex;
+}
+.game-textbox ul li .gameinfo {
     max-width:70%;
 }
+.game-textbox ul li h3,
 .game-textbox ul li p {
-    color:#fff;
-    font-weight:300;
+    color:var(--arclr);
+    font-weight:400;
     letter-spacing:-1px;
     margin:15px;
+}
+.game-textbox ul li h3 {
+    font-size:24px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow:0 3px 4px rgba(0,0,0,0.30);
 }
 .game-textbox ul li a {
     margin-left:10px; letter-spacing: -3px;
@@ -452,18 +514,63 @@ article .wheel-bg {
     align-items: center;
     width:220px;
     padding-top:5px;
+    transition: 0.4s;
 }
 .game-textbox ul li a .play-btn {
     font-size:60px;
-}
-.play-btn ion-icon {
-    color:#fff;
 }
 .game-textbox ul li a .play-text {
     display:block;
     height:50px;
     font-size:24px;
-    color:#fff;
+}
+.gameinfo a:hover {
+    transform:translateX(10px);
+}
+.gameinfo a:hover .play-btn ion-icon {
+    color:rgb(95, 196, 108);
+}
+.game-textbox ul li .nowplay {
+    width:30%;
+    min-width:200px;
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+}
+.nowplay .nowplayicon ion-icon {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    transform:translateY(20px);
+    transition:0.3s;
+    font-size:200px;
+}
+
+.nowplay .nowplaytext {
+    visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform:translateY(30px);
+    transition:0.4s;
+    opacity:0;
+    font-size:33px;
+}
+
+.nowplay:hover ion-icon{
+    transform:translateY(-10px);
+    color:rgb(95, 196, 108);
+}
+
+.nowplay:hover ion-icon{
+    transform:translateY(-10px);
+    color:rgb(95, 196, 108);
+}
+.nowplay:hover .nowplaytext {
+    visibility: visible;
+    transform:translateY(-25px);
+    opacity:1;
 }
 
 
@@ -502,4 +609,183 @@ article .wheel-bg {
 }
 .trailler-btn ion-icon {
     color:#ddd;
+}
+
+
+
+
+/* footer */
+
+footer {
+    width:100%;
+    padding:100px 0px;
+    margin-top:200px;
+    background:linear-gradient(to top, #222, rgb(61, 55, 58));
+    --ftclr:#ccc;
+}
+
+footer > div {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+}
+
+footer h4, footer p {
+    color:var(--ftclr);
+}
+footer h4 {
+    display:flex;
+    font-size:50px;
+    margin-bottom:20px;
+}
+footer h4 .neo{
+    color:rgb(95, 196, 108);
+    filter:invert(1);
+}
+footer h4 .player{
+    color:var(--ftclr);
+}
+footer .sns a {
+    margin:0 5px;
+}
+footer .sns i {
+    transition:0.3s;
+    font-size:60px;
+    color:var(--ftclr);
+}
+footer .sns a:hover i {
+    color:rgb(95, 196, 108);
+}
+
+
+
+/* 미디어쿼리 */
+
+
+@media screen and (max-width:767px) {
+    /* 헤더 */
+    header {
+        padding: 0 30px;
+    }
+    header h2 a { font-size:40px;}
+    
+    header ul {
+        visibility: hidden;
+        flex-direction:column;
+        position:fixed;
+        left:-50%;
+        top:0;
+        width:100%;
+        height:100%;
+        background:rgba(0,0,0,0.5);
+        transition: 0.4s;
+        opacity: 0;
+    }
+    header ul.active {
+        visibility: visible;
+        display:flex;
+        left:0;
+        opacity: 1;
+    }
+    header ul li {
+        width:100%;
+    }
+    header ul li a{
+        display:block;
+        width:100%;
+        margin:0;
+        padding:50px 30px;
+        background: rgba(0,0,0,0.5);
+        font-size:30px;
+    }
+    header ul li a span {
+        color:#fff;
+    }
+    header ul li a:hover {
+        background: rgba(0,0,0,0.3);
+    }
+
+    header .toggle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        right:50px;
+        width:70px;
+        height:70px;
+        cursor: pointer;
+    }
+    header .toggle:before {
+        content:"\f0c9";
+        font-family:"Font Awesome 5 Free";
+        font-weight:600;
+        font-size:60px;
+    }
+    header .toggle.active {
+        position:fixed;
+    }
+    header .toggle.active:before {
+        content:"\f00d";
+        font-family:"Font Awesome 5 Free";
+        font-weight:600;
+        font-size:60px;
+        color:#ddd;
+    }
+
+    /* 섹션 */
+
+    section {
+        flex-direction: column;
+        justify-content: center;
+        padding:100px 30px 200px;
+    }
+    section:before {
+        display:none;
+    }
+    .text-box {
+        display: flex;
+        width:100%;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    section .package-box {
+        margin-top: 270px;
+    }
+
+
+    /* 아티클 */
+
+    .package-box .package {
+        visibility: hidden;
+        position: absolute;
+        z-index: 2;
+        overflow: hidden;
+        width: 60%;
+        border-radius: 20px;
+        box-shadow: 3px 5px 8px rgb(0 0 0 / 30%);
+        cursor: pointer;
+    }
+
+    .scrolls {
+        height: 300px;
+    }
+
+    .imgBx {
+        height: 250px;
+    }
+
+    .game-textbox ul li {
+        flex-direction: column;
+        min-width: 100%;
+    }
+    .game-textbox ul li .gameinfo {
+        max-width: 100%;
+    }
+    .game-textbox ul li a {
+        margin: 0 auto;
+    }
+    .trailler-popup .trailler {
+        width: 350px;
+        height: 250px;
+    }
 }
