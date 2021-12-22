@@ -41,26 +41,26 @@
         opacity:0.15;
     }
     15% {
-        opacity:0.4;
+        opacity:0.05;
     }
     30% {
         opacity:0.15;
     }
     45% {
-        opacity:0.4;
+        opacity:0.05;
     }
     60% {
         opacity:0.15;
     }
     75% {
-        opacity:0.4;
+        opacity:0.05;
     }
     90% {
         opacity:0.15;
     }
     100% {
         left:0;
-        opacity:0.4;
+        opacity:0.05;
     }
 }
 /* 헤더 */
