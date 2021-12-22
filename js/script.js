@@ -20,12 +20,18 @@ $(".thumb > img").click(function(){
 var scrollValue; //스크롤 위치 확인
 $(window).scroll(function () { scrollValue = $(document).scrollTop(); console.log(scrollValue); });
 */
+
+let scob1;
+let scob2;
+let scob3;
+let scob4;
+
 $(window).scroll(function(){
     var scrol = window.scrollY;
-    const scob1 = $(".scr-game.active .scr-ob1");
-    const scob2 = $(".scr-game.active .scr-ob2");
-    const scob3 = $(".scr-game.active .scr-ob3");
-    const scob4 = $(".scr-game.active .scr-ob4");
+    scob1 = $(".scr-game.active .scr-ob1");
+    scob2 = $(".scr-game.active .scr-ob2");
+    scob3 = $(".scr-game.active .scr-ob3");
+    scob4 = $(".scr-game.active .scr-ob4");
 
     scob1.css({'top': (-1184+scrol)*0.1+"px"});
     scob2.css({'left': -(-1184+scrol)*0.15+"px"});
