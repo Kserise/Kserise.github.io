@@ -7,7 +7,7 @@ $(".toggle").click(function(){
 
 $(".package").eq(0).addClass("active");
 $(".thumb > img").click(function(){
-    var index = $(this).index();
+    let index = $(this).index();
     $(".thumb > img").removeClass("active");
     $(this).addClass("active");
     $(".package").removeClass("active");
@@ -25,9 +25,9 @@ let scob1;
 let scob2;
 let scob3;
 let scob4;
-
+let scrol;
 $(window).scroll(function(){
-    var scrol = window.scrollY;
+    scrol = window.scrollY;
     scob1 = $(".scr-game.active .scr-ob1");
     scob2 = $(".scr-game.active .scr-ob2");
     scob3 = $(".scr-game.active .scr-ob3");
@@ -52,13 +52,13 @@ function videoClose(){
     $(".trailler-popup").remove("active");
 }
 
-var scrIndex = 0;
+let scrIndex = 0;
 const scrGame = $(".scr-game");
 const scrText = $(".game-textbox > ul > li");
 scrGame.removeClass("active").eq(0).addClass("active");
 
 scrGame.click(function(){
-    var bgurl;
+    let bgurl;
 
     if(scrIndex < 2){
         scrIndex++;
@@ -85,8 +85,8 @@ scrGame.click(function(){
 
 
 $(".package").click(function(){
-    var index = $(this).index();
-    var bgurl;
+    let index = $(this).index();
+    let bgurl;
 
     if(index == 0) {
         bgurl = "imgs/tak-scr-bg.jpg";

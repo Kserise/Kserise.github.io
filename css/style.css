@@ -706,7 +706,6 @@ section .package-box {
 .moregame:hover:before {
     background:rgba(0,0,0,0);
 }
-.moregame:hover 
 .moregame img {
     width:100%;
     height:88%;
